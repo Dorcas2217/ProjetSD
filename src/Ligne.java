@@ -51,4 +51,16 @@ public class Ligne {
     public void setTemps_attente(int temps_attente) {
         this.temps_attente = temps_attente;
     }
+
+    @Override
+    public String toString() {
+        return "Ligne{" +
+            "idLigne=" + idLigne +
+            ", numeroLigne=" + numeroLigne +
+            ", premiereStation='" + premiereStation + '\'' +
+            ", destination='" + destination + '\'' +
+            ", type_transport='" + type_transport + '\'' +
+            ", temps_attente=" + temps_attente +
+            '}';
+    }
 }
