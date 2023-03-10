@@ -1,12 +1,12 @@
 public class Ligne {
     private int idLigne;
-    private final int numeroLigne;
+    private final String numeroLigne;
     private final String premiereStation;
     private final String destination;
     private String type_transport;
     private int temps_attente;
 
-    public Ligne(int idLigne, int numeroLigne, String premiereStation, String destination,
+    public Ligne(int idLigne, String numeroLigne, String premiereStation, String destination,
                  String type_transport, int temps_attente) {
         this.idLigne = idLigne;
         this.numeroLigne = numeroLigne;
@@ -24,7 +24,7 @@ public class Ligne {
         this.idLigne = idLigne;
     }
 
-    public int getNumeroLigne() {
+    public String getNumeroLigne() {
         return numeroLigne;
     }
 

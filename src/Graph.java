@@ -23,9 +23,11 @@ public class Graph {
       while( (currentLine = bufferedReader.readLine()) != null ){
 
          String[] Alire  = bufferedReader.readLine().split(",");
-        Ligne ligneLue = new Ligne(Integer.parseInt(Alire[0]), Integer.parseInt(Alire[1]),
-            Alire[2], Alire[3], Alire[4], Integer.parseInt(Alire[5]) );
-
+        Ligne ligneLue = new Ligne(
+            Integer.parseInt(Alire[0]),
+            Alire[1],
+            Alire[2], Alire[3], Alire[4],
+            Integer.parseInt(Alire[5]) );
            ensembleLigne.put(ligneLue.getIdLigne(), ligneLue);
 
       }
