@@ -2,13 +2,13 @@ import java.util.Objects;
 
 public class Tronçon {
 
-  private  Ligne ligne;
+  private Ligne ligne;
   private String depart;
   private String arrive;
   private int duree;
 
 
-  public Tronçon(Ligne ligne , String depart, String arrive, int duree) {
+  public Tronçon(Ligne ligne, String depart, String arrive, int duree) {
     this.ligne = ligne;
     this.depart = depart;
     this.arrive = arrive;
@@ -63,4 +63,11 @@ public class Tronçon {
   public int hashCode() {
     return Objects.hash(ligne, depart, arrive);
   }
+
+  @Override
+  public String toString() {
+    return "Tronçon [ départ=" + depart +
+        ", arrivée=" + arrive + ", durée=" + duree + ", ligne=" + ligne + ']';
+  }
 }
+
