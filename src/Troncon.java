@@ -3,12 +3,12 @@ import java.util.Objects;
 public class Troncon {
 
     private Ligne ligne;
-    private String depart;
-    private String arrive;
+    private Station depart;
+    private Station arrive;
     private int duree;
 
 
-    public Troncon(Ligne ligne , String depart, String arrive, int duree) {
+    public Troncon(Ligne ligne , Station depart, Station arrive, int duree) {
             this.ligne = ligne;
             this.depart = depart;
             this.arrive = arrive;
@@ -20,13 +20,13 @@ public class Troncon {
         public void setLigne(Ligne ligne) {
             this.ligne = ligne;
         }
-        public String getDepart() {
+        public Station getDepart() {
             return depart;
         }
-        public void setDepart(String depart) {
+        public void setDepart(Station depart) {
             this.depart = depart;
         }
-        public String getArrive() {
+        public Station getArrive() {
             return arrive;
         }
         public void setDuree(int duree) {
