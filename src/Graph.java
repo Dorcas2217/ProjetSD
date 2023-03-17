@@ -1,23 +1,17 @@
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.UncheckedIOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Supplier;
-import java.util.stream.Stream;
 
 public class Graph {
 
   private HashMap<Integer, Ligne> ensembleLigne = new HashMap<Integer, Ligne>();
-  private Map<Tronçon, Set<Ligne>> ensembleTroncon = new HashMap<Tronçon, Set<Ligne>>();
+  private Map<Troncon, Set<Ligne>> ensembleTroncon = new HashMap<Troncon, Set<Ligne>>();
 
   public Graph(File lignes, File troncons) {
     String currentLine;
@@ -35,7 +29,7 @@ public class Graph {
 
       while ((currentLine = bufferedReader.readLine()) != null) {
         String[] tabLigne = currentLine.split(",");
-        Tronçon ligneTroncon = new Tronçon(ensembleLigne.get(Integer.parseInt(tabLigne[0])),
+        Troncon ligneTroncon = new Troncon(ensembleLigne.get(Integer.parseInt(tabLigne[0])),
             tabLigne[1], tabLigne[2], Integer.parseInt(tabLigne[3]));
         ajouterSommet(ligneTroncon);
         ajouterArc(ligneTroncon);
@@ -46,12 +40,12 @@ public class Graph {
     }
   }
 
-  public void ajouterSommet(Tronçon ligneTroncon) {
+  public void ajouterSommet(Troncon ligneTroncon) {
     ensembleTroncon.put(ligneTroncon, new HashSet<Ligne>());
   }
 
-  public void ajouterArc(Tronçon tronçon) {
-    ensembleTroncon.get(tronçon).add(tronçon.getLigne());
+  public void ajouterArc(Troncon troncon) {
+    ensembleTroncon.get(troncon).add(troncon.getLigne());
   }
 
 
