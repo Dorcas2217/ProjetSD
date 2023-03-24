@@ -77,64 +77,9 @@ public class Graph {
 //                }
           }
         }
-
-
       }
-
-
     }
-
-
   }
-
- /*public void affichage(String arrive, String depart, HashMap<String, Troncon> chemins) {
-    if (!chemins.containsKey(arrive)) {
-      throw new RuntimeException();
-    }
-    String current = arrive;
-    ArrayDeque<Troncon> arrayDeque1 = new ArrayDeque<>();
-    while (!current.equals(depart)) {
-      Troncon troncon = chemins.get(current);
-      arrayDeque1.addFirst(troncon);
-      current = chemins.get(current).getDepart();
-    }
-    for (Troncon troncon : arrayDeque1) {
-      System.out.println(troncon);
-    }
-  } */
-
- /* public void calculerCheminMinimisantTempsTransport(String depart, String arrive) {
-
-    HashMap<String, Integer> etiquettesProvisoires = new HashMap<>();
-    HashMap<String, Integer> etiquettesDefinitives = new HashMap<>();
-    HashMap<String, Troncon> chemins = new HashMap<>();
-
-
-    etiquettesProvisoires.put(depart, 0);
-
-
-    String current = depart;
-    while (!etiquettesDefinitives.containsKey(arrive)) {
-      int min = Integer.MAX_VALUE;
-      for (String s : etiquettesProvisoires.keySet()) {
-        if (etiquettesProvisoires.get(s) < min) {
-          min = etiquettesProvisoires.get(s);
-          current = s;
-        }
-      }
-      etiquettesProvisoires.remove(current);
-      etiquettesDefinitives.put(current, min);
-      HashSet<Troncon> tronconHashSet = listeAdjacence.get(current);
-      for (Troncon troncon : tronconHashSet) {
-        if ((etiquettesProvisoires.get(troncon.getArrive()) == null || min + troncon.getDurée() < etiquettesProvisoires.get(troncon.getArrive()))
-                && !etiquettesDefinitives.containsKey(troncon.getArrive())) {
-          chemins.put(troncon.getArrive(), troncon);
-          etiquettesProvisoires.put(troncon.getArrive(), min + troncon.getDurée());
-        }
-      }
-    }
-    affichage(arrive, depart, chemins);
-  } */
 
   public void calculerCheminMinimisantTempsTransport(String depart, String arrive) {
 
