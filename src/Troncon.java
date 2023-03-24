@@ -51,6 +51,6 @@ public class Troncon {
         @Override
         public String toString() {
             return "Tronçon [ départ=" + depart +
-                    ", arrivée=" + arrive + ", durée=" + duree + ", ligne=" + ligne + ']';
+                    ", arrivée=" + arrive + ", durée=" + duree + ", " + ligne ;
         }
     }
