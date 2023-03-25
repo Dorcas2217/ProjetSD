@@ -53,4 +53,8 @@ public class Troncon {
             return "Tronçon [ départ=" + depart +
                     ", arrivée=" + arrive + ", durée=" + duree + ", " + ligne ;
         }
+
+    public int getDuree() {
+        return duree;
     }
+}
