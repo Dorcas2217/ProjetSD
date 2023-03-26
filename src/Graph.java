@@ -89,6 +89,7 @@ public class Graph {
           file.add(troncon.getArrive());
 
           if (troncon.getArrive().station.equals(arrive)) {
+            //Calcul des compteurs
             Troncon tronconCourant = troncon;
             while (tronconCourant != null) {
               dureeTransport += tronconCourant.getDuree();
@@ -100,6 +101,7 @@ public class Graph {
               tronconCourant = mapStationTroncon.get(tronconCourant.getDepart());
             }
             dureeTotale += lignePrecedente.getTemps_attente();
+            //Affichage
             afficherTrajet(mapStation.get(arrive), mapStationTroncon, stationDepart,
                 dureeTransport, dureeTotale, nbTroncons);
           }
@@ -157,15 +159,19 @@ public class Graph {
           cheminsOptimaux.put(stationVoisine, troncon);
           coutsTempo.put(stationVoisine, coutsTempo.get(currentStation) + troncon.getDuree());
           pq.add(stationVoisine);
-          dureeTransport += troncon.getDuree();
-          nbTroncons++;
         }
       }
-      if (currentStation == arriveeStation) {
-        dureeTotale = coutsTempo.get(currentStation);
-      }
     }
-      afficherTrajet(arriveeStation, cheminsOptimaux, mapStation.get(depart), dureeTransport,
-          dureeTotale, nbTroncons);
+    //Calcul des compteurs
+    Troncon tronconCourant = cheminsOptimaux.get(arriveeStation);
+    while (tronconCourant != null) {
+      dureeTransport += tronconCourant.getDuree();
+      nbTroncons++;
+      tronconCourant = cheminsOptimaux.get(tronconCourant.getDepart());
+    }
+    dureeTotale = couts.get(arriveeStation);
+    //Affichage
+    afficherTrajet(arriveeStation, cheminsOptimaux, mapStation.get(depart), dureeTransport,
+        dureeTotale, nbTroncons);
   }
 }
