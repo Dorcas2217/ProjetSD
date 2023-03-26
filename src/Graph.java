@@ -70,6 +70,7 @@ public class Graph {
     Deque<Station> file = new LinkedList<>();
     Map<Station, Troncon> mapStationTroncon = new HashMap<>();
     int dureeTransport = 0, dureeTotale = 0, nbTroncons = 0;
+    Ligne lignePrecedente = null;
 
     Station stationDepart = mapStation.get(depart);
 
@@ -88,6 +89,17 @@ public class Graph {
           file.add(troncon.getArrive());
 
           if (troncon.getArrive().station.equals(arrive)) {
+            Troncon tronconCourant = troncon;
+            while (tronconCourant != null) {
+              dureeTransport += tronconCourant.getDuree();
+              nbTroncons++;
+              if (lignePrecedente != null && lignePrecedente != tronconCourant.getLigne()) {
+                dureeTotale += lignePrecedente.getTemps_attente();
+              }
+              lignePrecedente = tronconCourant.getLigne();
+              tronconCourant = mapStationTroncon.get(tronconCourant.getDepart());
+            }
+            dureeTotale += lignePrecedente.getTemps_attente();
             afficherTrajet(mapStation.get(arrive), mapStationTroncon, stationDepart,
                 dureeTransport, dureeTotale, nbTroncons);
           }
@@ -123,34 +135,37 @@ public class Graph {
     Station arriveeStation = mapStation.get(arrive);
 
     Map<Station, Troncon> cheminsOptimaux = new HashMap<>();
-    Map<Station, Integer> coutsFixe = new HashMap<>();
+    Map<Station, Integer> couts = new HashMap<>();
     Map<Station, Integer> coutsTempo = new HashMap<>();
-
     int dureeTransport = 0, dureeTotale = 0, nbTroncons = 0;
 
     coutsTempo.put(currentStation, 0);
-
     PriorityQueue<Station> pq = new PriorityQueue<>(Comparator.comparingInt(coutsTempo::get));
     pq.add(currentStation);
 
-    while (!coutsFixe.containsKey(arriveeStation)) {
+    while (!couts.containsKey(arriveeStation)) {
       currentStation = pq.poll();
 
-      coutsFixe.put(currentStation, coutsTempo.get(currentStation));
+      couts.put(currentStation, coutsTempo.get(currentStation));
       Set<Troncon> lesTroncons = ensembleTroncon.get(currentStation);
 
       for (Troncon troncon : lesTroncons) {
         Station stationVoisine = troncon.getArrive();
-        if (stationVoisine != null && (!coutsFixe.containsKey(stationVoisine)
+        if (stationVoisine != null && (!couts.containsKey(stationVoisine)
             || coutsTempo.get(currentStation) + troncon.getDuree() < coutsTempo.get(
             stationVoisine))) {
           cheminsOptimaux.put(stationVoisine, troncon);
           coutsTempo.put(stationVoisine, coutsTempo.get(currentStation) + troncon.getDuree());
           pq.add(stationVoisine);
+          dureeTransport += troncon.getDuree();
+          nbTroncons++;
         }
       }
+      if (currentStation == arriveeStation) {
+        dureeTotale = coutsTempo.get(currentStation);
+      }
     }
-    afficherTrajet(arriveeStation, cheminsOptimaux, mapStation.get(depart), dureeTransport,
-        dureeTotale, nbTroncons);
+      afficherTrajet(arriveeStation, cheminsOptimaux, mapStation.get(depart), dureeTransport,
+          dureeTotale, nbTroncons);
   }
 }
