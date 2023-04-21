@@ -136,7 +136,7 @@ public class Graph {
     Station currentStation = mapStation.get(depart);
     Station arriveeStation = mapStation.get(arrive);
 
-    Map<Station, Troncon> cheminsOptimaux = new HashMap<>();
+    Map<Station, Troncon> cheminsOptimaux = new HashMap<>();  //TreeSet , un set et Map
     Map<Station, Integer> couts = new HashMap<>();
     Map<Station, Integer> coutsTempo = new HashMap<>();
     int dureeTransport = 0, dureeTotale = 0, nbTroncons = 0;
